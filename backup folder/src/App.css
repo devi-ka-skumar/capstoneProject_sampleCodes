@@ -1,0 +1,36 @@
+.app-container {
+  overflow: hidden;
+  display: flex;
+  min-height: 100vh;
+  background-color: white;
+}
+
+.content-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.title {
+  font-family: "Pacifico", cursive;
+  color: #e95d4d;
+  font-size: 4.5rem;
+  margin-bottom: 0.2rem;
+}
+
+.tagline {
+  font-family: "Pacifico", cursive;
+  color: #537955;
+  font-size: 1.5rem;
+  align-self: self-end;
+  margin-top: 0.3rem;
+  margin-left: 30%;
+}
+
+.bg-image {
+  width: 450px;
+  height: auto;
+  border: none;
+  box-shadow: none;
+  margin-top: 0.2rem;
+}
