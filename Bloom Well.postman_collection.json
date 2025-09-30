@@ -1,0 +1,131 @@
+{
+	"info": {
+		"_postman_id": "d4a35a1c-264a-4188-8430-3d5fe55347c8",
+		"name": "Bloom Well",
+		"description": "This is the documentation of the APIs provided by the backend for the Bloom Well application.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "27138972"
+	},
+	"item": [
+		{
+			"name": "Test API",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:5000/hi",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"hi"
+					]
+				},
+				"description": "This API is a simple Test API to ensure the backend server is up and running. It requires no parameters. Upon a succesful hit, the API will respond with the message 'Hi :D'"
+			},
+			"response": []
+		},
+		{
+			"name": "Sign Up",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"firstName\":\"Kevin\",\r\n    \"lastName\": \"Joseph\",\r\n    \"email\":\"kevin.orathel@gmail.com\",\r\n    \"password\": \"kevin123\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/signup",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"signup"
+					]
+				},
+				"description": "This API requires 4 parameters in it's request body:\n\n- firstName: First name of the new user\n    \n- lastName: Last name of the new user\n    \n- email: Email of the new user\n    \n- password: Password of the new user\n    \n\nReturns the message 'User registered successfully' upon a succesful signup. Can also return the message 'Email already exists' if the email is already associated with a user.\n\nReturns the message 'All fields are required' if one or more of the required fields are not found in the request body."
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\":\"kevin.orathel@gmail.com\",\r\n    \"password\":\"kevin123\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:5000/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"login"
+					]
+				},
+				"description": "This API requires 2 parameters in the request body:\n\n- email: Email of the user\n    \n- password: Password associated with the account of the user\n    \n\nReturns the message 'Login successful' along with the user_id of the user on successful login\n\nElse returns 'Invalid username/email or password'"
+			},
+			"response": []
+		},
+		{
+			"name": "Predict Emotion",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "video",
+							"type": "file",
+							"src": "/C:/Users/kevin/OneDrive/Desktop/Sample Video.mp4"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:5000/predict",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "5000",
+					"path": [
+						"predict"
+					]
+				},
+				"description": "This is Bloom well's main API endpoint. This API requires only a single parameter in it's request body.\n\n- Video: A short video of the user recorded from their webcam\n    \n\nThe algorithm of the API is explained below -:\n\n1. The video is first stored in a new temporary folder (within the project directory) called \"UPLOAD_FOLDER\"\n    \n2. The video is processed and every 5th frame of the video taken\n    \n3. For each frame taken in the above step, the image is converted into a grayscale image as part of pre processing\n    \n4. The grayscale image is passed to the model and the model predicts the mood in that image\n    \n5. The predicted mood from the frame is added to a dictionary\n    \n6. Once all the frames have been processed, the mood which has the highest frequency count is returned as the most dominant mood identified throughout the video.\n    \n\nAn sample response from this API is given below:\n\n{\n\n\"frequency\": 109,\n\n\"full_distribution\": {\n\n\"Angry\": 3,\n\n\"Happy\": 109,\n\n\"Surprise\": 15\n\n},\n\n\"predicted_emotion\": \"Happy\"\n\n}"
+			},
+			"response": []
+		}
+	]
+}
